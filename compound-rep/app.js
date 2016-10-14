@@ -21,7 +21,7 @@ fs.readFile( __dirname + '/customer.json', 'utf8', ( err, data ) => {
 	// parse the file t a readable object
 	let parsedData = JSON.parse(data)
 	calcCompound ( parsedData )
-} ) 
+} ) 	
 
 //Function to calculate compound interest from a customer object
 var calcCompound = (customer) => { 
