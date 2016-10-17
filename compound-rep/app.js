@@ -1,7 +1,10 @@
-'use strict'
+	'use strict'
 
 // importing necessary modules
 const fs = require( 'fs' )
+
+const readThis = require('./json-file-reader')
+
 
 //Helper Function
 let roundDecimal = (number) => {
@@ -16,15 +19,8 @@ let prettyNr = (number) => {
 	return addCommas(roundDecimal(number))
 }
 
-//read the customer data json
-fs.readFile( __dirname + '/customer.json', 'utf8', ( err, data ) => {
-	// parse the file t a readable object
-	let parsedData = JSON.parse(data)
-	calcCompound ( parsedData )
-} ) 	
+readThis ( __dirname + '/customer.json', (customer) => { 
 
-//Function to calculate compound interest from a customer object
-var calcCompound = (customer) => { 
 	// Set end amount variable property and calculate total duration
 	customer.pension.endamount = {
 		pessimistic: customer.finances.startcapital,
@@ -56,7 +52,7 @@ var calcCompound = (customer) => {
 	console.log("In a average scenario: €" + prettyNr(customer.pension.endamount.average))
 	console.log("In an optimistic scenario: €" + prettyNr(customer.pension.endamount.optimistic))
 	
-}
+})
 
 
 
